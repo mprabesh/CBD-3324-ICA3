@@ -1,0 +1,11 @@
+apiVersion: v2
+name: redis
+description: A Helm chart for Redis cache service
+type: application
+version: 0.1.0
+appVersion: "7.0"
+keywords:
+  - redis
+  - cache
+maintainers:
+  - name: PRABESH MAGAR

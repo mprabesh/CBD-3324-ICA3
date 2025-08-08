@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.flask.name }}
+  labels:
+{{- toYaml .Values.flask.labels | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{- toYaml .Values.flask.labels | nindent 6 }}
+  replicas: {{ .Values.flask.replicas }}
+  template:
+    metadata:
+      labels:
+{{- toYaml .Values.flask.labels | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.flask.name }}
+        image: {{ .Values.flask.image.repository }}:{{ .Values.flask.image.tag }}
+        imagePullPolicy: {{ .Values.flask.image.pullPolicy }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.flask.name }}-configmap
+              optional: false
+          - secretRef:
+              name: {{ .Values.flask.name }}-secret
+              optional: false
+        ports:
+        - containerPort: {{ .Values.flask.containerPorts.http }}

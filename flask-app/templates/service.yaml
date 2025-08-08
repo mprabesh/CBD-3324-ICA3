@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.flask.name }}
+  labels:
+{{- toYaml .Values.flask.labels | nindent 4 }}
+spec:
+  ports:
+  - port: 5000            # the port on which the service is listening (Flask)
+    protocol: TCP
+    targetPort: {{ .Values.flask.containerPorts.http }}      # the port exposed by Pod (Flask app on port 5000)
+  type: NodePort
+  selector:
+{{- toYaml .Values.flask.labels | nindent 4 }}       # Pod label that service is using to select Pods

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.redis.name }}
+  labels:
+{{- toYaml .Values.redis.labels | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{- toYaml .Values.redis.labels | nindent 6 }}
+  replicas: {{ .Values.redis.replicas }}
+  template:
+    metadata:
+      labels:
+{{- toYaml .Values.redis.labels | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.redis.name }}
+        image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
+        imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.redis.name }}-configmap
+              optional: false
+          - secretRef:
+              name: {{ .Values.redis.name }}-secret
+              optional: false
+        ports:
+        - containerPort: {{ .Values.redis.containerPorts.redis }}
+        resources:
+{{- toYaml .Values.redis.resources | nindent 10 }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.redis.containerPorts.redis }}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.redis.containerPorts.redis }}
+          initialDelaySeconds: 5
+          periodSeconds: 5

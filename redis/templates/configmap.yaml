@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.redis.name }}-configmap
+  labels:
+{{- toYaml .Values.redis.labels | nindent 4 }}
+data:
+{{- range $k, $v := .Values.redis.configmap }}
+  {{ $k }}: {{ $v | quote }}
+{{- end }}

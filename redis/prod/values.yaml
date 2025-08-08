@@ -1,0 +1,30 @@
+redis:
+  name: c0941004-redis
+  labels:
+    app: redis
+    env: prod
+    stack: flask-app
+  image:
+    repository: redis
+    tag: 7.0-alpine
+    pullPolicy: IfNotPresent
+  replicas: 2
+  configmap:
+    ## KEY: "value"
+    # Redis Configuration
+    REDIS_HOST: yourID-redis
+    REDIS_PORT: "6379"
+    REDIS_MAXMEMORY: "512mb"
+    REDIS_MAXMEMORY_POLICY: "allkeys-lru"
+    
+    # Application Environment
+    APP_ENV: prod
+  containerPorts:
+      redis: 6379
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"

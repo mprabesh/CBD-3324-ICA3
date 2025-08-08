@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 1.0.0
+version: 1.0.0
+name: flask-app-stack
+description: flask-app stack
+keywords:
+  - nginx
+  - flask-app
+  - postgres
+  - redis
+maintainers:  
+  - name: PRABESH MAGAR

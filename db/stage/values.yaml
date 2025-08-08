@@ -1,0 +1,48 @@
+db:
+  name: c0941004-db
+  labels:
+    app: db
+    env: stage
+    stack: flask-app
+  image:
+    repository: postgres
+    tag: 13-alpine
+    pullPolicy: Always
+  replicas: 1
+  configmap:
+    ## KEY: "value"
+    # PostgreSQL Configuration
+    POSTGRES_DB: mydb
+    POSTGRES_USER: yourID
+    DB_HOST: yourID-db
+    DB_NAME: mydb
+    DB_USER: yourID
+    DB_PORT: "5432"
+    
+    # Redis Configuration  
+    REDIS_HOST: yourID-redis
+    REDIS_PORT: "6379"
+    
+    # Flask Configuration
+    FLASK_HOST: "0.0.0.0"
+    FLASK_PORT: "5000"
+    
+    # Legacy MySQL/MariaDB (if still needed)
+    MYSQL_DATABASE: flask-app
+    MYSQL_USER: flask-app
+    
+    # Application Environment
+    APP_ENV: stage
+  containerPorts:
+      postgres: 5432
+  # volume:
+  #     name: nginx-proxy-cache-store
+  #     mount:
+  #         path: /var/lib/mysql
+  #         name: nginx-proxy-cache-store
+  #     storage: 1T
+  #     nfs:
+  #         path: /shared_volume
+  #         server: dev-cache-filestore.internal.gdev.postmedia.digital
+  #     claim:
+  #         name: nginx-proxy-cache-store-claim
