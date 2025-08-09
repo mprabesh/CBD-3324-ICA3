@@ -5,8 +5,8 @@ flask:
     env: stage
     stack: flask-app
   image:
-    repository: your-flask-app-image
-    tag: stage
+    repository: rohan2053/flask-app-ica3
+    tag: v1
     pullPolicy: Always
   replicas: 3
   configmap:

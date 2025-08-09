@@ -5,8 +5,8 @@ flask:
     env: prod
     stack: flask-app
   image:
-    repository: your-flask-app-image
-    tag: v1.0.0
+    repository: rohan2053/flask-app-ica3
+    tag: v1
     pullPolicy: IfNotPresent
   replicas: 5
   configmap:
