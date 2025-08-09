@@ -6,7 +6,7 @@ flask:
     stack: flask-app
   image:
     repository: rohan2053/flask-app-ica3
-    tag: v1
+    tag: v2
     pullPolicy: Always
   replicas: 3
   rollingUpdate:
