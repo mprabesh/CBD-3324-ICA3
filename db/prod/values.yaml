@@ -11,25 +11,9 @@ db:
   replicas: 1
   configmap:
     ## KEY: "value"
-    # PostgreSQL Configuration
+    # PostgreSQL Configuration - Only POSTGRES_* variables for PostgreSQL
     POSTGRES_DB: mydb
-    POSTGRES_USER: yourID
-    DB_HOST: yourID-db
-    DB_NAME: mydb
-    DB_USER: yourID
-    DB_PORT: "5432"
-    
-    # Redis Configuration  
-    REDIS_HOST: yourID-redis
-    REDIS_PORT: "6379"
-    
-    # Flask Configuration
-    FLASK_HOST: "0.0.0.0"
-    FLASK_PORT: "5000"
-    
-        # Legacy MySQL/MariaDB (if still needed)
-    MYSQL_DATABASE: flask-app
-    MYSQL_USER: flask-app
+    POSTGRES_USER: c0941004
     
     # Application Environment
     APP_ENV: prod

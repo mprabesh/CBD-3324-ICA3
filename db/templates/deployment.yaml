@@ -27,9 +27,34 @@ spec:
               optional: false
         ports:
         - containerPort: {{ .Values.db.containerPorts.postgres }}
+        readinessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        livenessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        resources:
+{{- toYaml .Values.db.resources | nindent 10 }}
         volumeMounts:
         - name: {{ .Values.db.name }}-volume
           mountPath: /var/lib/postgresql/data       # Path inside container for PostgreSQL
+          subPath: pgdata                           # Create subdirectory to avoid permission issues
       volumes:
       - name: {{ .Values.db.name }}-volume
         hostPath:
