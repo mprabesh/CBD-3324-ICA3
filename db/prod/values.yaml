@@ -14,11 +14,19 @@ db:
     # PostgreSQL Configuration - Only POSTGRES_* variables for PostgreSQL
     POSTGRES_DB: mydb
     POSTGRES_USER: c0941004
+    PGDATA: /var/lib/postgresql/data/pgdata
     
     # Application Environment
     APP_ENV: prod
   containerPorts:
       postgres: 5432
+  resources:
+    requests:
+      cpu: "300m"
+      memory: "512Mi"
+    limits:
+      cpu: "600m"
+      memory: "1Gi"
   # volume:
   #     name: nginx-proxy-cache-store
   #     mount:

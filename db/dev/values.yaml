@@ -14,6 +14,7 @@ db:
     # PostgreSQL Configuration - Only POSTGRES_* variables for PostgreSQL
     POSTGRES_DB: mydb
     POSTGRES_USER: c0941004
+    PGDATA: /var/lib/postgresql/data/pgdata
     
     # Application Environment
     APP_ENV: dev
